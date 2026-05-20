@@ -1,5 +1,6 @@
 import os
 import logging
+import asyncio
 
 from telegram import Update
 from telegram.ext import (
@@ -44,7 +45,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     await update.message.reply_text(
-        "Send me media to store."
+        "Send media to store."
     )
 
 
@@ -88,7 +89,7 @@ async def save_media(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
-def main():
+async def main():
 
     app = (
         Application.builder()
@@ -109,8 +110,8 @@ def main():
 
     print("Bot running...")
 
-    app.run_polling()
+    await app.run_polling()
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
